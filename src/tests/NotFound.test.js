@@ -11,7 +11,9 @@ describe('Teste o componente <NotFound.js />', () => {
     const history = createMemoryHistory();
     render(<Router history={ history }><App /></Router>);
 
-    history.push('/palmeiras-o-maior-do-brasil');
+    const maiorDoBrasil = '/palmeiras-o-maior-do-brasil';
+
+    history.push(maiorDoBrasil);
 
     const notFoundText = await screen.findByRole('heading', {
       name: /page requested not found/i,
@@ -23,9 +25,16 @@ describe('Teste o componente <NotFound.js />', () => {
     const history = createMemoryHistory();
     render(<Router history={ history }><App /></Router>);
 
-    history.push('/palmeiras-o-maior-do-brasil');
+    const maiorDoBrasil = '/palmeiras-o-maior-do-brasil';
+
+    history.push(maiorDoBrasil);
+    // console.log(history.pathname);
+    // pathname = rota;
 
     const notFoundImg = await screen.findByRole('img', { name: /pikachu crying because the page requested was not found/i });
+    const { location: { pathname } } = history;
+
     expect(notFoundImg).toHaveAttribute('src', 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
+    expect(pathname).toBe(maiorDoBrasil);
   });
 });
