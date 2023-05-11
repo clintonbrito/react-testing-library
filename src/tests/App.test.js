@@ -21,7 +21,6 @@ describe('Teste o componente `<App.js />`', () => {
   test('Exibe na tela um link com o texto `Favorite Pokémon`', () => {
     render(<MemoryRouter><App /></MemoryRouter>);
     const favPokemonLink = screen.getByRole('link', { name: 'Favorite Pokémon' });
-
     expect(favPokemonLink).toBeInTheDocument();
   });
 });
