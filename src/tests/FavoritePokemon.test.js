@@ -17,22 +17,19 @@ describe('Teste o componente <FavoritePokemon.js />', () => {
   test('Exibe na tela apenas os Pokémon favoritados', async () => {
     render(<MemoryRouter><App /></MemoryRouter>);
     const pikachuDetails = screen.getByRole('link', { name: 'More details' });
-
     userEvent.click(pikachuDetails);
 
     const pikachuDetailsText = await screen.findByText('This intelligent Pokémon roasts hard berries with electricity to make them tender enough to eat.');
     expect(pikachuDetailsText).toBeInTheDocument();
 
-    const pikachuFavButton = screen.getByText(/pokémon favoritado\?/i);
-    expect(pikachuFavButton).toBeInTheDocument();
+    const pikachuFavCheckbox = screen.getByText(/pokémon favoritado\?/i);
+    expect(pikachuFavCheckbox).toBeInTheDocument();
+    userEvent.click(pikachuFavCheckbox);
 
-    userEvent.click(pikachuFavButton);
+    const favPokemonLink = screen.getByRole('link', { name: /favorite pokémon/i });
+    userEvent.click(favPokemonLink);
 
     const pikachuFavStar = screen.getByRole('img', { name: /pikachu is marked as favorite/i });
     expect(pikachuFavStar).toBeInTheDocument();
-
-    const favPokemonLink = screen.getByRole('link', { name: /favorite pokémon/i });
-
-    userEvent.click(favPokemonLink);
   });
 });
